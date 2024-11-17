@@ -3,6 +3,7 @@
 namespace eo_EmployeeMangement.API.Controllers
 {
     [ApiController]
+    [Route("api/employees")]
     public class EmployeesController : ControllerBase
     {
         [HttpGet]
