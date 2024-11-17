@@ -5,6 +5,7 @@ namespace eo_EmployeeMangement.API.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
+        [HttpGet]
         public JsonResult GetEmployees()
         {
             return new JsonResult(
