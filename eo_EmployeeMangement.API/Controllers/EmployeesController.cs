@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using eo_EmployeeMangement.API.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace eo_EmployeeMangement.API.Controllers
 {
@@ -16,10 +17,17 @@ namespace eo_EmployeeMangement.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public JsonResult GetEmployee(int id)
+        public ActionResult<EmployeeDTO> GetEmployee(int id)
         {
-            return new JsonResult(
-                EmployeesDataStore.Current.Employees.FirstOrDefault(e => e.Id == id));
+            EmployeeDTO employeeResult = EmployeesDataStore.Current.Employees
+                .FirstOrDefault(e  => e.Id == id);
+
+            if (employeeResult == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(employeeResult);
         }
     }
 }
