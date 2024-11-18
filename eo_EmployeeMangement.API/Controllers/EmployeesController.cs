@@ -9,11 +9,17 @@ namespace eo_EmployeeMangement.API.Controllers
         [HttpGet]
         public JsonResult GetEmployees()
         {
+            // Returns dummy data from the Employees Current instance.
             return new JsonResult(
-                new List<object> {
-                    new { id = 1, Name = "John Doe"},
-                    new { id = 2, Name = "Jane Doe"}
-                });
+                EmployeesDataStore.Current.Employees
+                );
+        }
+
+        [HttpGet("{id}")]
+        public JsonResult GetEmployee(int id)
+        {
+            return new JsonResult(
+                EmployeesDataStore.Current.Employees.FirstOrDefault(e => e.Id == id));
         }
     }
 }
