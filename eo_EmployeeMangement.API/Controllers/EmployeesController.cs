@@ -8,19 +8,17 @@ namespace eo_EmployeeMangement.API.Controllers
     public class EmployeesController : ControllerBase
     {
         [HttpGet]
-        public JsonResult GetEmployees()
+        public ActionResult<IEnumerable<EmployeeDTO>> GetEmployees()
         {
             // Returns dummy data from the Employees Current instance.
-            return new JsonResult(
-                EmployeesDataStore.Current.Employees
-                );
+            return Ok(EmployeesDataStore.Current.Employees);
         }
 
         [HttpGet("{id}")]
         public ActionResult<EmployeeDTO> GetEmployee(int id)
         {
             EmployeeDTO employeeResult = EmployeesDataStore.Current.Employees
-                .FirstOrDefault(e  => e.Id == id);
+                .FirstOrDefault(e => e.Id == id);
 
             if (employeeResult == null)
             {
